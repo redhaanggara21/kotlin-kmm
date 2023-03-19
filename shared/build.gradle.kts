@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("org.jetbrains.kotlin.android")
 }
 
 kotlin {
@@ -34,7 +35,19 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting{
+            dependencies{
+                implementation(
+                    "com.google.android.material:material:1.2.1"
+                )
+                implementation(
+                    "io.ktor:ktor-client-android:1.0.0"
+                )
+                implementation(
+                    "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
+                )
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
@@ -64,4 +77,8 @@ android {
         minSdk = 21
         targetSdk = 33
     }
+}
+dependencies {
+    implementation("com.google.firebase:firebase-crashlytics-buildtools:2.8.1")
+    implementation("androidx.core:core-ktx:+")
 }
